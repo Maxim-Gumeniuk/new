@@ -40,8 +40,6 @@ export const GoogleAuth = () => {
 
   }
 
-
-
   return (
     <StyledBox>
       <FcGoogle onClick={googlePopup} size={25}/>

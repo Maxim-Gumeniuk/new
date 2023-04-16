@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom';
 import { Protected } from '../../../types/routes/protected';
 import { useAppDispatch } from '../../../app/hooks';
 import { actions } from '../../../features/user';
+import { easeOut } from 'framer-motion';
+import { useCheckCredentialsForAnamation } from '../../../hooks/use-check-credentials-for-animation';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +22,7 @@ export const Login = () => {
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
   const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const auth = getAuth();
   const submit = async () => {
@@ -34,6 +36,7 @@ export const Login = () => {
     }
   }
 
+  const checkCredentials = useCheckCredentialsForAnamation(email, password);
   return (
     <>
       <Container>
@@ -43,7 +46,7 @@ export const Login = () => {
           <GoogleAuth />
           <GitHubAuth />
         </FlexBox>
-        <StyledButton onClick={submit}>
+        <StyledButton animate={checkCredentials} whileTap={{ scale: 0.9, transition: { ease: easeOut, duration: 0.5 } }} onClick={submit}>
           <Typography size='16px'>Sign in</Typography>
         </StyledButton>
         <Typography size='16px' cursor='pointer'>
@@ -51,7 +54,6 @@ export const Login = () => {
             Don`t have an account?... Sign Up
           </NavLink >
         </Typography >
-
       </Container >
 
     </>

@@ -6,6 +6,7 @@ import { CommonRoutes } from '../../../types/routes/common';
 import { Input } from '../../atoms/common/input';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+import { useCheckCredentialsForAnamation } from '../../../hooks/use-check-credentials-for-animation';
 
 export const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -21,12 +22,14 @@ export const SignUp = () => {
       const errorCode = error.code;
       const errorMessage = error.message;
     });
+
+  const checkCredentials = useCheckCredentialsForAnamation(email, password);
   return (
     <>
       <Container>
         <Input value={email} handleValue={handleEmail} />
         <Input text='password' type='password' value={password} handleValue={handlePassword} />
-        <StyledButton onClick={submit}>
+        <StyledButton onClick={submit} animate={checkCredentials}>
           <Typography size='16px'>Sign Up</Typography>
         </StyledButton>
         <Typography size='16px' cursor='pointer'>

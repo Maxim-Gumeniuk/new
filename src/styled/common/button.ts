@@ -1,7 +1,8 @@
+import { motion } from 'framer-motion';
 import styled, { DefaultTheme, ThemedStyledProps } from 'styled-components';
 import { MyGlobalStyle } from '../global';
 
-export const StyledButton = styled.button`
+export const StyledButton = styled(motion.button)`
   background-color: ${(
     themeProps: ThemedStyledProps<MyGlobalStyle, DefaultTheme>,
   ) => themeProps.theme.colors.main};
@@ -12,4 +13,8 @@ export const StyledButton = styled.button`
     props.theme.borderRadius};
   border: none;
   color: #fff;
+
+  & > span {
+    cursor: pointer;
+  }
 `;

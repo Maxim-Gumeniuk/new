@@ -32,7 +32,7 @@ export const GitHubAuth = () => {
 
   return (
     <StyledBox>
-      <GoMarkGithub onClick={handleGitHubAuth} size={25}/>
+      <GoMarkGithub onClick={handleGitHubAuth} size={25} />
     </StyledBox>
   )
 }
