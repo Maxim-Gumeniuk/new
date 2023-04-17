@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  position?: string;
+}
+
+export const Container = styled.div<ContainerProps>`
   position: relative;
   top: 50%;
   left: 50%;
@@ -14,12 +18,12 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  
-  @media(max-width: 1100px) {
+
+  @media (max-width: 1100px) {
     width: 60%;
   }
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     width: 80%;
   }
 `;

@@ -3,8 +3,10 @@ import styled, { DefaultTheme, ThemedStyledProps } from 'styled-components';
 import { Container } from '../../../styled/common/container';
 import { Square } from '../../../styled/common/square';
 import { MyGlobalStyle } from '../../../styled/global';
-
-const Point = styled(motion.div)`
+interface PointProps {
+  position?: string;
+}
+const Point = styled(motion.div) <PointProps>`
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -18,7 +20,6 @@ export const Loader = () => {
         <Point style={{ position: 'absolute' }} animate={{ scale: [10, 0, 5, 2, 10] }} transition={{ repeat: Infinity, duration: 1.5, ease: 'easeIn' }}></Point>
         <Square transition={{ repeat: Infinity, duration: 1.7 }} animate={{ rotate: 360 }} ></Square>
         <Square style={{ position: 'absolute' }} transition={{ repeat: Infinity, duration: 1.4 }} animate={{ rotate: -360 }}>
-
         </Square>
       </Container>
     </>
