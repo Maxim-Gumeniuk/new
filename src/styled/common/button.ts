@@ -7,7 +7,7 @@ export const StyledButton = styled(motion.button)`
     themeProps: ThemedStyledProps<MyGlobalStyle, DefaultTheme>,
   ) => themeProps.theme.colors.main};
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   cursor: pointer;
   border-radius: ${(props: ThemedStyledProps<MyGlobalStyle, DefaultTheme>) =>
     props.theme.borderRadius};

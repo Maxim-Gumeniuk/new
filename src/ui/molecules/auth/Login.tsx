@@ -42,7 +42,7 @@ export const Login = () => {
       <Container>
         <Input value={email} handleValue={handleEmail} />
         <Input text='password' type='password' value={password} handleValue={handlePassword} />
-        <FlexBox gridGap='20px' alignItems='center' justifyContent='center'>
+        <FlexBox height="auto" gridGap='20px'>
           <GoogleAuth />
           <GitHubAuth />
         </FlexBox>
