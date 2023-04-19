@@ -8,10 +8,15 @@ import { BurgerContainer } from '../../../styled/burger-menu/container'
 import { IconContainer } from '../../../styled/burger-menu/icon-container'
 import { navMenu } from '../../../utils/arrays-for-mapping/nav-menu'
 import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, LayoutGroup } from 'framer-motion';
+import { ActiveLine } from './active-line';
 
 export const Burger = () => {
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(0);
+  const selectedFunc = (i: number) => {
+    setSelected(i);
+  }
 
   const handleOpen = () => setOpen(prev => !prev);
   return (
@@ -19,7 +24,8 @@ export const Burger = () => {
       <IconContainer animate={open ? { display: 'none' } : { display: 'block' }} transition={!open ? { delay: 0.45 } : {}} onClick={handleOpen}>
         <RiMenu5Line size={30} />
       </IconContainer>
-      <AnimatePresence>
+      <AnimatePresence
+      >
         {
           open && (
             <BurgerContainer key="burger" initial={'hidden'} animate={'visible'} exit={'hidden'} transition={{ duration: 0.4 }} variants={burgerMenu}>
@@ -31,31 +37,34 @@ export const Burger = () => {
                 alignItems='center'
                 gap='50px'
               >
-
                 {
                   navMenu.map((item, index) => (
-                    <LinkContainer key={`${item.title}_${index}`}
-                      variants={LinkVariants}
-                      initial='hidden'
-                      animate={'visible'}
-                      exit={'hidden'}
-                      custom={index}
-                    >
-                      <NavLink size='30px' to={'/'}
+                    <LayoutGroup key={`${item}`}>
+                      <LinkContainer
+                        layout
+                        key={`${item.title}_${index}`}
+                        style={{ position: 'relative' }}
+                        variants={LinkVariants}
+                        initial='hidden'
+                        animate={'visible'}
+                        exit={'hidden'}
+                        custom={index}
+                        onClick={() => selectedFunc(index)}
                       >
-                        {item.title}
-                      </NavLink>
-
-                    </LinkContainer>
+                        {index === selected && <ActiveLine />}
+                        <NavLink size='30px' to={'/'}
+                        >
+                          {item.title}
+                        </NavLink>
+                      </LinkContainer>
+                    </LayoutGroup>
                   ))
                 }
               </FlexBox >
             </BurgerContainer >
           )
         }
-
       </AnimatePresence>
     </>
-
   )
 }
